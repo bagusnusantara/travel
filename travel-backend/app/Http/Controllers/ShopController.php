@@ -11,22 +11,13 @@ use DB;
 use Auth;
 use Validator;
 use App\User;
-use App\Book;
+use App\Destination;
 use App\Order;
-use App\BookOrder;
+use App\DestinationOrder;
 
 class ShopController extends Controller
 {
-    public function provinces()
-    {
-        return new ProvinceResourceCollection(Province::get());
-    }
 
-    public function cities()
-    {
-        return new CityResourceCollection(City::get());
-    }
-    
     /**
      * Update the specified resource in storage.
      *
@@ -42,30 +33,26 @@ class ShopController extends Controller
         $code = 200;
         if ($user) {
             $this->validate($request, [
-                'name' => 'required', 
+                'name' => 'required',
                 'address' => 'required',
                 'phone' => 'required',
-                'province_id' => 'required',
-                'city_id' => 'required',
             ]);
             $user->name = $request->name;
             $user->address = $request->address;
             $user->phone = $request->phone;
-            $user->province_id = $request->province_id;
-            $user->city_id = $request->city_id;
             if($user->save()){
                 $status = "success";
                 $message = "Update shipping success";
-                $data = $user->toArray();        
+                $data = $user->toArray();
             }
             else{
                 $message = "Update shipping failed";
-            }    
+            }
         }
         else{
             $message = "User not found";
         }
-        
+
         return response()->json([
             'status' => $status,
             'message' => $message,
@@ -73,49 +60,6 @@ class ShopController extends Controller
         ], $code);
     }
 
-    public function couriers()
-    {
-        $couriers = [
-            ['id'=>'jne', 'text'=> 'JNE'],
-            ['id'=>'tiki', 'text'=> 'TIKI'],
-            ['id'=>'pos', 'text'=> 'POS'],
-        ];
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'courier',
-            'data' => $couriers
-        ], 200);
-    }
-
-    protected function getServices($data)
-    {
-        $url_cost = "https://api.rajaongkir.com/starter/cost";
-        $key="YOUR_RAJA_ONGKIR_API_KEY";
-        $postdata = http_build_query($data);
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-            CURLOPT_URL => $url_cost,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => $postdata, 
-            CURLOPT_HTTPHEADER => [
-                "content-type: application/x-www-form-urlencoded",
-                "key: ".$key
-            ],
-        ]);
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
-        curl_close($curl);
-        return [
-            'error' =>  $error,
-            'response' =>  $response,
-        ];
-    }
 
     protected function validateCart($carts)
     {
@@ -124,29 +68,27 @@ class ShopController extends Controller
             'quantity_before' => 0,
             'quantity'  => 0,
             'price'     => 0,
-            'weight'    => 0,
         ];
         $idx = 0;
         foreach($carts as $cart){
             $id = (int)$cart['id'];
             $quantity = (int)$cart['quantity'];
             $total['quantity_before'] += $quantity;
-            $book = Book::find($id);
-            if($book){
-                if($book->stock>0){
-                    $safe_carts[$idx]['id'] = $book->id;  
-                    $safe_carts[$idx]['title'] = $book->title;  
-                    $safe_carts[$idx]['cover'] = $book->cover;  
-                    $safe_carts[$idx]['price'] = $book->price;  
-                    $safe_carts[$idx]['weight'] = $book->weight;  
-                    if($book->stock < $quantity){
-                        $quantity = (int) $book->stock;
+            $destination = destination::find($id);
+            if($destination){
+                if($destination->stock>0){
+                    $safe_carts[$idx]['id'] = $destination->id;
+                    $safe_carts[$idx]['title'] = $destination->title;
+                    $safe_carts[$idx]['cover'] = $destination->cover;
+                    $safe_carts[$idx]['price'] = $destination->price;
+                    $safe_carts[$idx]['weight'] = $destination->weight;
+                    if($destination->stock < $quantity){
+                        $quantity = (int) $destination->stock;
                     }
                     $safe_carts[$idx]['quantity'] = $quantity;
 
                     $total['quantity']  += $quantity;
-                    $total['price']     += $book->price * $quantity;
-                    $total['weight']    += $book->weight * $quantity;
+                    $total['price']     += $destination->price * $quantity;
                     $idx++;
                 }
                 else{
@@ -167,7 +109,7 @@ class ShopController extends Controller
         $data = [];
         // validasi kelengkapan data
         $this->validate($request, [
-            'courier' => 'required', 
+            // 'courier' => 'required',
             'carts' => 'required',
         ]);
 
@@ -176,8 +118,8 @@ class ShopController extends Controller
             $destination = $user->city_id;
             if($destination>0){
                 // hardcode
-                $origin = 153; // Jakarta Selatan
-                $courier = $request->courier;
+                // $origin = 153; // Jakarta Selatan
+                // $courier = $request->courier;
                 $carts = $request->carts;
                 $carts = json_decode($carts, true);
                 // validasi data belanja
@@ -185,63 +127,15 @@ class ShopController extends Controller
                 $data['safe_carts'] = $validCart['safe_carts'];
                 $data['total'] = $validCart['total'];
                 $quantity_different = $data['total']['quantity_before']<>$data['total']['quantity'];
-                $weight = $validCart['total']['weight'] * 1000;
-                if($weight>0){
-                    // request courier service API RajaOngkir
-                    $parameter = [
-                        "origin"        => $origin, 
-                        "destination"   => $destination, 
-                        "weight"        => $weight, 
-                        "courier"       => $courier
-                    ];
-                    $respon_services = $this->getServices($parameter);
-                    if ($respon_services['error']==null) {
-                        $services = [];
-                        $response = json_decode($respon_services['response']);
-                        $costs = $response->rajaongkir->results[0]->costs;
-                        foreach($costs as $cost){
-                            $service_name = $cost->service;
-                            $service_cost = $cost->cost[0]->value;
-                            $service_estimation = str_replace('hari', '', trim($cost->cost[0]->etd));
-                            $services[] = [
-                                'service' => $service_name,
-                                'cost' => $service_cost,
-                                'estimation' => $service_estimation,
-                                'resume' => $service_name .' [ Rp. '.number_format($service_cost).', Etd: '.$cost->cost[0]->etd.' day(s) ]'
-                            ];
-                        }
-
-                        // Response
-                        if(count($services)>0){
-                            $data['services'] = $services;
-                            $status = "success";
-                            $message = "getting services success";
-                        }
-                        else{
-                            $message = "courier services unavailable";
-                        }
-
-                        if($quantity_different){
-                            $status = "warning";
-                            $message = "Check cart data, ".$message;
-                        }
-                        
-                    } else {
-                        $message = "cURL Error #:" . $respon_services['error'];
-                    }
-                }
-                else{
-                    $message = "weight invalid";  
-                }
             }
             else{
-                $message = "destination not set"; 
+                $message = "destination not set";
             }
         }
         else{
-            $message = "user not found"; 
+            $message = "user not found";
         }
-        
+
         return response()->json([
             'status' => $status,
             'message' => $message,
@@ -260,48 +154,46 @@ class ShopController extends Controller
         if ($user) {
             // validasi kelengkapan data
             $this->validate($request, [
-                'courier' => 'required', 
-                'service' => 'required', 
+            //    'courier' => 'required',
+            //    'service' => 'required',
                 'carts' => 'required',
             ]);
-            
+
             DB::beginTransaction();
             try {
                 // prepare data
                 $origin = 153; // Jakarta Selatan
                 $destination = $user->city_id;
                 if($destination<=0) $error++;
-                $courier = $request->courier;
-                $service = $request->service;
+                // $courier = $request->courier;
+                // $service = $request->service;
                 $carts = json_decode($request->carts, true);
-                
+
                 // create order
                 $order = new Order;
                 $order->user_id = $user->id;
                 $order->total_bill = 0;
                 $order->invoice_number = date('YmdHis');
-                $order->courier_service = $courier.'-'.$service;
+                // $order->courier_service = $courier.'-'.$service;
                 $order->status = 'SUBMIT';
                 if($order->save()){
                     $total_price = 0;
-                    $total_weight = 0;
+                    // $total_weight = 0;
                     foreach($carts as $cart){
                         $id = (int)$cart['id'];
                         $quantity = (int)$cart['quantity'];
-                        $book = Book::find($id);
-                        if($book){
-                            if($book->stock>=$quantity){
-                                $total_price += $book->price * $quantity;
-                                $total_weight += $book->weight * $quantity;
-                                // create book order
-                                $book_order = new BookOrder;
-                                $book_order->book_id = $book->id;
-                                $book_order->order_id = $order->id;
-                                $book_order->quantity = $quantity;
-                                if($book_order->save()){
+                        $destination = destination::find($id);
+                        if($destination){
+                            if($destination->stock>=$quantity){
+                                $total_price += $destination->price * $quantity;
+                                $destination_order = new destinationOrder;
+                                $destination_order->destination_id = $destination->id;
+                                $destination_order->order_id = $order->id;
+                                $destination_order->quantity = $quantity;
+                                if($destination_order->save()){
                                     // kurangi stock
-                                    $book->stock = $book->stock - $quantity;
-                                    $book->save(); 
+                                    $destination->stock = $destination->stock - $quantity;
+                                    $destination->save();
                                 }
                             }
                             else{
@@ -311,44 +203,13 @@ class ShopController extends Controller
                         }
                         else{
                             $error++;
-                            throw new \Exception('Book is not found');
+                            throw new \Exception('destination is not found');
                         }
                     }
 
                     $totalBill = 0;
-                    $weight = $total_weight * 1000; // to gram
-                    if($weight<=0) {
-                        $error++;
-                        throw new \Exception('Weight null');
-                    }
-                    $data = [
-                        "origin"        => $origin, 
-                        "destination"   => $destination, 
-                        "weight"        => $weight, 
-                        "courier"       => $courier
-                    ];
-                    $data_cost = $this->getServices($data);           
-                    if ($data_cost['error']){
-                        $error++; 
-                        throw new \Exception('Courier service unavailable');
-                    }
 
-                    $response = json_decode($data_cost['response']);
-                    $costs = $response->rajaongkir->results[0]->costs;
-                    $service_cost = 0;
-                    foreach($costs as $cost){
-                        $service_name = $cost->service;
-                        if($service == $service_name){
-                            $service_cost = $cost->cost[0]->value;
-                            break;
-                        }
-                    }
-                    if ($service_cost<=0){
-                        $error++;
-                        throw new \Exception('Service cost invalid');
-                    } 
-
-                    $total_bill = $total_price + $service_cost;
+                    $total_bill = $total_price;
                     // update total bill order
                     $order->total_bill = $total_bill;
                     if($order->save()){
@@ -366,7 +227,7 @@ class ShopController extends Controller
                             $message = 'There are '.$error.' errors';
                         }
                     }
-                }         
+                }
             } catch (\Exception $e) {
                 $message = $e->getMessage();
                 DB::rollback();
@@ -381,7 +242,7 @@ class ShopController extends Controller
             'message' => $message,
             'data' => $data
         ], 200);
-        
+
     }
 
     public function myOrder(Request $request)

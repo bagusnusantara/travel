@@ -11,7 +11,7 @@ class ProvincesTableSeeder extends Seeder
      */
     public function run()
     {
-        $url_province = "https://api.rajaongkir.com/starter/province?key=YOUR_RAJA_ONGKIR_API_KEY";
+        $url_province = "https://api.rajaongkir.com/starter/province?key=e1db1fc0f2e1ca677a49956dc8fdad70";
         $json_str = file_get_contents($url_province);
         $json_obj = json_decode($json_str);
         $provinces = [];

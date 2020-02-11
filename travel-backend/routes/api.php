@@ -27,11 +27,13 @@ Route::prefix('v1')->group(function () {
     Route::get('books/slug/{slug}', 'BookController@slug');
     Route::get('books/search/{keyword}', 'BookController@search');
 
-    Route::post('books/cart', 'BookController@cart');
+    Route::get('destinations', 'DestinationController@index');
+    Route::get('destinations/top/{count}', 'DestinationController@top');
+    Route::get('destinations/slug/{slug}', 'DestinationController@slug');
+    Route::get('destinations/search/{keyword}', 'DestinationController@search');
 
-    Route::get('provinces', 'ShopController@provinces');
-    Route::get('cities', 'ShopController@cities');
-    Route::get('couriers', 'ShopController@couriers');
+    Route::post('destinations/cart', 'BookController@cart');
+
     // auth
     Route::middleware(['auth:api'])->group(function () {
         Route::post('logout', 'AuthController@logout');

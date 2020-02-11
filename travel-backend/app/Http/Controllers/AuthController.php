@@ -13,35 +13,35 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required', 
+            'email' => 'required',
             'password' => 'required',
         ]);
 
         $user = User::where('email', '=', $request->email)->firstOrFail();
-        $status = "error";
+        $status = false;
         $message = "";
         $data = null;
         $code = 401;
         if($user){
             if (Hash::check($request->password, $user->password)) {
                 $user->generateToken();
-                $status = 'success';
+                $status = true;
                 $message = 'Login sukses';
                 $data = $user->toArray();
-                $code = 200;  
+                $code = 200;
             }
             else{
                 $message = "Login gagal, password salah";
-            }          
+            }
         }
         else{
             $message = "Login gagal, username salah";
         }
 
         return response()->json([
-            'status' => $status,
+            'isSuccesful' => $status,
             'message' => $message,
-            'data' => $data
+            'user' => $data
         ], $code);
     }
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-        
+
         $status = "error";
         $message = "";
         $data = null;
@@ -69,7 +69,7 @@ class AuthController extends Controller
                 'roles'    => json_encode(['CUSTOMER']),
             ]);
             if($user){
-                Auth::login($user);
+                //Auth::login($user);
                 $user->generateToken();
                 $status = "success";
                 $message = "register successfully";
@@ -99,6 +99,6 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'logout berhasil',
             'data' => []
-        ], 200); 
+        ], 200);
     }
 }

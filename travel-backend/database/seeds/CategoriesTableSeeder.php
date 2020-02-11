@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
             $name = str_replace('.', '', $name);
             $slug = str_replace(' ', '-', strtolower($name));
             $category = $image_categories[mt_rand(0, 8)];
-            $image_path = '/var/www/larashop-api/public/images/categories';
+            $image_path = 'D:\Projects\larashop-api\public\images\categories';
             $image_fullpath = $faker->image( $image_path, 500, 300, $category, true, true, $category);
             $image = str_replace($image_path . '/' , '', $image_fullpath);
             $categories[$i] = [

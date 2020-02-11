@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class Promos extends ResourceCollection
+class Destinations extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -14,11 +14,10 @@ class Promos extends ResourceCollection
      */
     public function toArray($request)
     {
-        //return parent::toArray($request);
         return [
             'status' => 'success',
-            'message' => 'categories data',
+            'message' => 'Destinations data',
             'data' => parent::toArray($request),
-            ];
+       ];
     }
 }
