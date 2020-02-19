@@ -8,8 +8,8 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="headline text-uppercase">
         <v-icon>mdi-airplane-takeoff</v-icon>
-        <span>Fiji</span>
-        <span class="font-weight-light">Travel</span>
+        <span>Fiji Travel</span>
+        <span class="font-weight-light"> Domestic</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click="setDialogComponent('cart')">

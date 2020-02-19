@@ -170,7 +170,7 @@ CREATE TABLE `destination_order` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `destination_order` */
 
@@ -185,7 +185,9 @@ insert  into `destination_order`(`id`,`destination_id`,`order_id`,`quantity`,`cr
 (22,1,24,1,'2020-01-20 08:09:28','2020-01-20 08:09:28'),
 (23,1,25,2,'2020-01-20 08:52:20','2020-01-20 08:52:20'),
 (24,1,27,1,'2020-01-20 09:01:41','2020-01-20 09:01:41'),
-(25,1,28,3,'2020-01-20 09:02:12','2020-01-20 09:02:12');
+(25,1,28,3,'2020-01-20 09:02:12','2020-01-20 09:02:12'),
+(26,1,29,1,'2020-02-11 03:21:05','2020-02-11 03:21:05'),
+(27,1,30,1,'2020-02-19 01:26:53','2020-02-19 01:26:53');
 
 /*Table structure for table `destinations` */
 
@@ -196,8 +198,6 @@ CREATE TABLE `destinations` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
-  `author` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `publisher` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cover` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `price` double(8,2) unsigned NOT NULL DEFAULT '0.00',
   `weight` double(8,2) unsigned NOT NULL DEFAULT '0.00',
@@ -212,36 +212,16 @@ CREATE TABLE `destinations` (
   `deleted_by` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `books_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `destinations` */
 
-insert  into `destinations`(`id`,`title`,`slug`,`description`,`author`,`publisher`,`cover`,`price`,`weight`,`views`,`stock`,`status`,`created_at`,`updated_at`,`deleted_at`,`created_by`,`updated_by`,`deleted_by`) values 
-(1,'Adipisci voluptas quam','adipisci-voluptas-quam','Inventore dolore et nostrum aut aut doloribus. Est facilis tempore non quaerat. Ut eos est tempore eos nemo vitae minus. Eum et odit optio facilis aut id vitae.','Lauriane Lynch','O\'Reilly-Walter','a05463161ac8d1b926418aed812b7ec1.jpg',200000.00,0.50,0,92,'PUBLISH','2019-12-27 02:23:11','2020-01-20 09:02:12',NULL,NULL,NULL,NULL),
-(2,'Rerum quis neque quisquam quam non','rerum-quis-neque-quisquam-quam-non','Sed accusamus suscipit sit labore molestiae voluptates qui autem. Eveniet iste dolores odit. Exercitationem laborum ducimus saepe non possimus eos. Et voluptas et recusandae quae. Dolorem dolorem corrupti in.','Dr. Enos Corkery','Padberg Ltd','c02bad1796f29f9f57c35b7a68c9dfce.jpg',150000.00,0.50,0,0,'PUBLISH','2019-12-27 02:23:13','2020-01-17 02:47:29',NULL,NULL,NULL,NULL),
-(3,'Eum alias qui voluptatibus consequatur','eum-alias-qui-voluptatibus-consequatur','Quidem maxime voluptatem consectetur. Nulla quo labore hic in. Dolores ab libero aliquam odio tenetur numquam.','Dr. Maverick Torp I','McGlynn-Yundt','50b47c2c8344a98091bb9838422ff2c6.jpg',50000.00,0.50,0,0,'PUBLISH','2019-12-27 02:23:14','2020-01-17 03:17:39',NULL,NULL,NULL,NULL),
-(4,'Soluta hic rem','soluta-hic-rem','Aut inventore ea omnis voluptas possimus. In numquam consequatur impedit culpa culpa. Quia placeat doloremque accusantium laboriosam voluptatem.','Allie Ferry V','Cruickshank, Marks and Cummerata','8c72dc3791ed4e8026a5d97920790eb2.jpg',300000.00,0.50,0,0,'PUBLISH','2019-12-27 02:23:15','2020-01-17 02:46:39',NULL,NULL,NULL,NULL),
-(5,'Eum impedit qui voluptatem sapiente aliquid','eum-impedit-qui-voluptatem-sapiente-aliquid','Aperiam voluptatem hic et et natus aliquam ratione. Est et blanditiis laborum nisi. Quo tenetur possimus ex.','Dr. Russell Hand','Simonis-Bashirian','7589fff56749dc6ac39583dce8b5a61b.jpg',50000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:18',NULL,NULL,NULL,NULL,NULL),
-(6,'Nostrum libero quae non','nostrum-libero-quae-non','Facere sunt ipsam magnam accusamus aut. Quam cupiditate quia et voluptatem. Iure et aut alias quod inventore similique et. Aut quibusdam accusantium natus harum ea. Rerum earum quisquam quia nulla laboriosam odit aut animi.','Sylvan Russel','O\'Conner, Fritsch and McGlynn','40254316f557b3ce704d8f689394199a.jpg',400000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:19',NULL,NULL,NULL,NULL,NULL),
-(7,'Et est neque dolor incidunt','et-est-neque-dolor-incidunt','Similique id delectus eaque omnis. Tenetur dolorum quia voluptatum esse cum. Eligendi culpa aliquid ipsam porro cum. Officia quod dignissimos eos cumque quasi consequuntur. Praesentium rem ut autem maxime. Deleniti quia sequi et numquam voluptas.','Mrs. Maia Ernser','Erdman, Thiel and Becker','b78ed750a0a5954c01a6ecef8ba5b7bf.jpg',200000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:21',NULL,NULL,NULL,NULL,NULL),
-(8,'Sequi ab sapiente et quidem voluptatibus qui enim sunt','sequi-ab-sapiente-et-quidem-voluptatibus-qui-enim-sunt','Cum beatae et tenetur reiciendis atque. Ipsam vero autem ut veritatis eligendi. Explicabo error consequatur non dolorum iste.','Dr. Horacio Ryan I','Klein PLC','45dc2f49225193259498e04a27a7211e.jpg',50000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:22',NULL,NULL,NULL,NULL,NULL),
-(9,'Voluptates natus cupiditate fuga eveniet','voluptates-natus-cupiditate-fuga-eveniet','In quod numquam nobis nulla molestias culpa. Debitis facilis aut odit dolore voluptas qui. Qui et et aut dolor iure quis.','Ashtyn Predovic','Douglas, Gaylord and Strosin','3f534cf51c2b096c9b650af1d603d919.jpg',50000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:24',NULL,NULL,NULL,NULL,NULL),
-(10,'Omnis quia quam corrupti repudiandae laboriosam eum','omnis-quia-quam-corrupti-repudiandae-laboriosam-eum','Architecto earum quod et quidem ex. Aut qui dolorem voluptatem molestiae. Ut aut aut voluptate dolorum alias aliquam. Aut ipsa voluptas veniam enim.','Selina Sanford','Zemlak Group','6b39f57ed68ada83d30f56f9858fbb85.jpg',150000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:25',NULL,NULL,NULL,NULL,NULL),
-(11,'Quo quaerat quas dolor','quo-quaerat-quas-dolor','Neque perspiciatis quos saepe voluptate tempora sed. Exercitationem architecto velit distinctio impedit unde consequatur. Quia ut eos minus aut sed incidunt sunt. Aut doloribus id aut sint voluptates ipsam occaecati.','Jaqueline Lockman PhD','Braun Ltd','b53e8df3851bd35af8716240cf4a7461.jpg',500000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:26',NULL,NULL,NULL,NULL,NULL),
-(12,'Eos iure veritatis','eos-iure-veritatis','Nesciunt et vitae vitae. Ab voluptates harum occaecati aut laboriosam modi quo soluta. Nulla qui aut fugiat voluptatem expedita. Libero explicabo excepturi et numquam est.','Kiarra Sanford','Sawayn-Schuster','470d43ce1a2c9044cff226e894f490a8.jpg',450000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:29',NULL,NULL,NULL,NULL,NULL),
-(13,'Dolores praesentium asperiores architecto et','dolores-praesentium-asperiores-architecto-et','Eius repellat et dicta non quam. Reprehenderit error eos quia voluptates. Iste sit totam qui corporis cupiditate perspiciatis. Qui sunt ex maxime totam modi blanditiis perspiciatis. Excepturi sapiente et animi perferendis.','Miss Amya Ward Jr.','Kilback Group','ddb718b5dd78c10034c7ebd048c8d226.jpg',150000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:30',NULL,NULL,NULL,NULL,NULL),
-(14,'Ullam veritatis sit cupiditate accusamus voluptatem itaque sapiente','ullam-veritatis-sit-cupiditate-accusamus-voluptatem-itaque-sapiente','Consequatur aut totam placeat. Vel ratione dolorem aut autem illo. At quia sit odit architecto omnis. Qui rerum dicta et nihil laboriosam.','Mrs. Susie Reinger','Turcotte and Sons','2312661e8b1d6ba77f7d9192548b2877.jpg',300000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:31',NULL,NULL,NULL,NULL,NULL),
-(15,'Quae sed in eveniet totam ut ea nam','quae-sed-in-eveniet-totam-ut-ea-nam','Nam ut dolor eum perferendis dolorum nulla excepturi. Repudiandae in vel ea voluptatem. Molestias aut ratione eligendi ut voluptas facere cum ratione. Reiciendis ea nihil sed atque. Quia quis alias non voluptas quaerat consequatur vitae.','Colby Howe','Mraz LLC','e1386059762c4991e980352ac6de633f.jpg',200000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:33',NULL,NULL,NULL,NULL,NULL),
-(16,'Expedita fugiat architecto aperiam aliquid harum hic et','expedita-fugiat-architecto-aperiam-aliquid-harum-hic-et','Dolores quasi soluta fugit dolorum nisi illo. Qui quasi eos aut sit recusandae molestias. Sed omnis accusantium vel dolor eaque aut iusto nemo.','Hassie Ratke','Beatty Group','71f83350f840c171116d45983d2193b4.jpg',450000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:34',NULL,NULL,NULL,NULL,NULL),
-(17,'Necessitatibus velit officiis velit','necessitatibus-velit-officiis-velit','Atque numquam nisi dolores. Ducimus nam omnis dolorem ea minus qui. Illum id enim ex consequatur deserunt.','Lester Mraz','Ankunding, Douglas and Kemmer','85fe63d20896779d25d1661c44d42319.jpg',150000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:36',NULL,NULL,NULL,NULL,NULL),
-(18,'Velit ut laudantium aperiam','velit-ut-laudantium-aperiam','Voluptas fugit ut voluptatem voluptatem ut voluptatum vitae aut. Dolore in rerum est in nam voluptatem. Aperiam culpa est ipsam magni est magni voluptatem et.','Cydney Bashirian','Wyman, Reilly and Gleason','081c522411130d1d64eac3226052e84d.jpg',50000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:37',NULL,NULL,NULL,NULL,NULL),
-(19,'Ut maiores rerum','ut-maiores-rerum','Vel aspernatur saepe distinctio qui quas. Sit perferendis aut suscipit maxime illo accusantium voluptas ullam. Laudantium possimus voluptatem quaerat aut laborum in consequatur ipsum. Repellat nihil hic atque officia et sit quis.','Ollie Goldner','Ruecker-Paucek','cf2ea41fe5e7a44f253dd075bd9cd7b9.jpg',50000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:38',NULL,NULL,NULL,NULL,NULL),
-(20,'Et atque unde mollitia corporis aut animi','et-atque-unde-mollitia-corporis-aut-animi','Voluptatibus corporis non quia quidem iusto eos. Eius sunt sint architecto iure distinctio est asperiores. Dolore neque non velit eveniet. Voluptates delectus quia modi est sed voluptates perspiciatis.','Elisa Becker','Parisian-Hintz','19eee896a6bf2c21616a72a53d387038.jpg',200000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:39',NULL,NULL,NULL,NULL,NULL),
-(21,'Iste debitis nostrum','iste-debitis-nostrum','Quod ad nisi in dolores blanditiis sed. Corporis id cum est omnis laudantium hic est. Possimus deleniti et magnam ab repellat rem rerum.','Desmond Nikolaus IV','Ortiz-Hansen','139ad3c4bb2530a99a00bd0320574647.jpg',150000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:41',NULL,NULL,NULL,NULL,NULL),
-(22,'Rerum eum illum dolore qui perferendis voluptas culpa','rerum-eum-illum-dolore-qui-perferendis-voluptas-culpa','Voluptatibus ea aut dolores est. Commodi quam et qui sint. Voluptatem expedita nisi et quos. Voluptas et sint nobis aliquid qui et enim. Quisquam esse voluptatem eum eos. Sint et aliquid consequatur quia provident tenetur.','Gregg Volkman','Brakus, Kub and Sipes','3c3074633b3541d7fea53fcf423305f0.jpg',500000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:42',NULL,NULL,NULL,NULL,NULL),
-(23,'Reiciendis suscipit est autem laboriosam sapiente non','reiciendis-suscipit-est-autem-laboriosam-sapiente-non','Reiciendis possimus laborum nemo nam. Veritatis optio eum quo omnis ea eaque. Ut voluptates in recusandae.','Arlie Braun','Murazik-Grady','94a04857498bbc3fefc45ac6869baf46.jpg',350000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:43',NULL,NULL,NULL,NULL,NULL),
-(24,'Ad et ut provident aut hic cumque','ad-et-ut-provident-aut-hic-cumque','Eos qui repudiandae quis sit rem nesciunt atque. Sequi ut corrupti ipsa reiciendis molestiae iusto tempore. Voluptatibus et unde soluta illo voluptatem fugit quos.','Abdiel Bartoletti','Beer, Towne and Walsh','ba22bdc318276277fce07a99d5a60c30.jpg',150000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:45',NULL,NULL,NULL,NULL,NULL),
-(25,'Est iure delectus corrupti praesentium debitis omnis','est-iure-delectus-corrupti-praesentium-debitis-omnis','Iusto quae qui nihil ea. Sequi voluptate iure possimus perspiciatis vel sit cumque consequatur. Asperiores et repudiandae dolor iure.','Eldon Schulist','Douglas Inc','a61c2d5193644b9b19d38162502b69d3.jpg',300000.00,0.50,0,1,'PUBLISH','2019-12-27 02:23:47',NULL,NULL,NULL,NULL,NULL);
+insert  into `destinations`(`id`,`title`,`slug`,`description`,`cover`,`price`,`weight`,`views`,`stock`,`status`,`created_at`,`updated_at`,`deleted_at`,`created_by`,`updated_by`,`deleted_by`) values 
+(1,'Nadi','nadi','Inventore dolore et nostrum aut aut doloribus. Est facilis tempore non quaerat. Ut eos est tempore eos nemo vitae minus. Eum et odit optio facilis aut id vitae.','nadi.jpg',200000.00,0.50,0,49,'PUBLISH','2019-12-27 02:23:11','2020-02-19 01:26:53',NULL,NULL,NULL,NULL),
+(2,'Savusavu','savusavu','Sed accusamus suscipit sit labore molestiae voluptates qui autem. Eveniet iste dolores odit. Exercitationem laborum ducimus saepe non possimus eos. Et voluptas et recusandae quae. Dolorem dolorem corrupti in.','savusavu.jpg',150000.00,0.50,0,30,'PUBLISH','2019-12-27 02:23:13','2020-01-17 02:47:29',NULL,NULL,NULL,NULL),
+(3,'Suva','suva','Quidem maxime voluptatem consectetur. Nulla quo labore hic in. Dolores ab libero aliquam odio tenetur numquam.','suva.jpg',50000.00,0.50,0,40,'PUBLISH','2019-12-27 02:23:14','2020-01-17 03:17:39',NULL,NULL,NULL,NULL),
+(4,'Taveuni','taveuni','Aut inventore ea omnis voluptas possimus. In numquam consequatur impedit culpa culpa. Quia placeat doloremque accusantium laboriosam voluptatem.','taveuni.jpg',300000.00,0.50,0,50,'PUBLISH','2019-12-27 02:23:15','2020-01-17 02:46:39',NULL,NULL,NULL,NULL),
+(5,'Labasa','labasa','Aperiam voluptatem hic et et natus aliquam ratione. Est et blanditiis laborum nisi. Quo tenetur possimus ex.','labasa.jpg',50000.00,0.50,0,70,'PUBLISH','2019-12-27 02:23:18',NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `migrations` */
 
@@ -283,7 +263,7 @@ CREATE TABLE `orders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `orders` */
 
@@ -298,7 +278,9 @@ insert  into `orders`(`id`,`user_id`,`total_bill`,`invoice_number`,`courier_serv
 (24,1,200000.00,'20200120080928',NULL,'SUBMIT','2020-01-20 08:09:28','2020-01-20 08:09:28'),
 (25,1,400000.00,'20200120085220',NULL,'SUBMIT','2020-01-20 08:52:20','2020-01-20 08:52:20'),
 (27,1,200000.00,'20200120090141',NULL,'SUBMIT','2020-01-20 09:01:41','2020-01-20 09:01:41'),
-(28,1,600000.00,'20200120090212',NULL,'SUBMIT','2020-01-20 09:02:12','2020-01-20 09:02:12');
+(28,1,600000.00,'20200120090212',NULL,'SUBMIT','2020-01-20 09:02:12','2020-01-20 09:02:12'),
+(29,1,200000.00,'20200211032105',NULL,'SUBMIT','2020-02-11 03:21:05','2020-02-11 03:21:05'),
+(30,1,200000.00,'20200219012653',NULL,'SUBMIT','2020-02-19 01:26:53','2020-02-19 01:26:53');
 
 /*Table structure for table `password_resets` */
 
@@ -337,12 +319,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   UNIQUE KEY `users_api_token_unique` (`api_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 
 insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remember_token`,`created_at`,`updated_at`,`roles`,`address`,`city_id`,`province_id`,`phone`,`avatar`,`status`,`api_token`) values 
-(1,'Nemesio Raitubu','nemesioroko15@gmail.com',NULL,'$2y$10$c2X8i3PmP1pVqrXzn5JRguJl7ayNP2twt.CeY8lpsFz.9ybEGHhfu',NULL,'2019-12-27 02:23:05','2020-01-21 07:14:20','[\"CUSTOMER\"]','Jalan Nginden 3 nomor 50\nasasa',30,2,'085784088316','308f7724007d02037f468484b42600d4.jpg','ACTIVE',NULL),
+(1,'Nemesio Raitubu','nemesioroko15@gmail.com',NULL,'$2y$10$c2X8i3PmP1pVqrXzn5JRguJl7ayNP2twt.CeY8lpsFz.9ybEGHhfu',NULL,'2019-12-27 02:23:05','2020-02-19 01:23:14','[\"CUSTOMER\"]','Jalan Nginden 3 nomor 50\nasasa',30,2,'085784088316','308f7724007d02037f468484b42600d4.jpg','ACTIVE','fE9flPds0gMeonsb0KSIQatI9gbgzPnHOqXyvm6F7357G9coEnzBt9QkbAF9'),
 (2,'Christian Fay II','odurgan@example.org',NULL,'$2y$10$38VyrmmVvKeYlgytTBM0Ku9uLl7fJp0QEF8jKAXBjPZJyQxm8U3sS',NULL,'2019-12-27 02:23:07',NULL,'[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,'168eb8b1a2404ea6f5a5391bda517d56.jpg','ACTIVE',NULL),
 (3,'Olen Howe','rhermann@example.net',NULL,'$2y$10$NpBPH/F5yLkB2JXh4eiR7e/uSzZbOepvU.S0F5fnXNfWxjQZOYljK',NULL,'2019-12-27 02:23:08',NULL,'[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,'85cb6c09d57b136d99e05a547aa18954.jpg','ACTIVE',NULL),
 (4,'Miss Maryse Feil IV','uking@example.net',NULL,'$2y$10$Pmt9iR6n4HKPWGJiAlzTlOCzNy26Z6xkGA6E6P2lsT5YeGY.CZMaG',NULL,'2019-12-27 02:23:09',NULL,'[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,'0fd5938c0ce94fc3723ffaa23f0b5073.jpg','ACTIVE',NULL),
@@ -352,10 +334,11 @@ insert  into `users`(`id`,`name`,`email`,`email_verified_at`,`password`,`remembe
 (8,'nusa','nusa@gmail.com',NULL,'$2y$10$tVX20vaVko9vJafKXI8EGubE.nMuGEvX//O.Zvg4XCOs83cQ5Zuzy',NULL,'2020-01-02 01:55:06','2020-01-02 01:55:06','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
 (9,'nemesio','nemesioroko16@gmail.com',NULL,'$2y$10$bcuNZClCb/N922ndqPeifeYqhN.dXpIQyakVEavt07UAgW4RgBVlW',NULL,'2020-01-02 02:17:35','2020-01-02 02:17:35','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
 (10,'nus','nusa@nusa.com',NULL,'$2y$10$WvzNO3jS.UWGKQK0TZsO5O2VnCyxsmB3Vl2AWllcowIE292OZjJ7S',NULL,'2020-01-02 02:23:17','2020-01-02 02:23:17','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE','QoiHoPw62a122G8qAdpfaTpWRcTNWFp9YSrl5DDlqtvmgZxh7gUztw5DJZLy'),
-(11,'nuys','akautzer@example.net',NULL,'$2y$10$JAaexjDsNwFUSdJNc0ockuS2muhPt/3c8U9k/ktdZd1qhV7Q7VKnS',NULL,'2020-01-02 02:24:32','2020-01-02 02:24:32','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
+(11,'nuys','akautzer@example.net',NULL,'$2y$10$JAaexjDsNwFUSdJNc0ockuS2muhPt/3c8U9k/ktdZd1qhV7Q7VKnS',NULL,'2020-01-02 02:24:32','2020-02-11 03:17:29','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
 (12,'nuys','akautzer@examples.net',NULL,'$2y$10$F.x6tFmC5d.2U6LA3CfAWuoN.zsCaxRH7gOwM42urrE4OJlcXB2SC',NULL,'2020-01-02 02:27:09','2020-01-02 02:27:09','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
 (13,'nemesio','nemesioroko162@gmail.com',NULL,'$2y$10$.87FBN9RZkKmoiYeO9ZViuki3Z8Tu6MaBS2u0AwMCbgB6W9w87vQa',NULL,'2020-01-02 02:33:29','2020-01-06 04:31:42','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE','mNCgr45uWDXSV4KkCNtJNkPEJdoBySgzLUEef8ZQL2kO9xWl1tWerjOWMf5R'),
-(14,'asas','akautzer@example.nets',NULL,'$2y$10$EPwlSUAjfMjqZ301hzGvSetbtzowjwN9U21QUJgUj93d34rRsavMa',NULL,'2020-01-02 02:33:50','2020-01-02 02:33:56','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL);
+(14,'asas','akautzer@example.nets',NULL,'$2y$10$EPwlSUAjfMjqZ301hzGvSetbtzowjwN9U21QUJgUj93d34rRsavMa',NULL,'2020-01-02 02:33:50','2020-01-02 02:33:56','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,NULL,'ACTIVE',NULL),
+(15,'adetiya bagus','bagus.nusantara313@gmail.com',NULL,'$2y$10$3pNW4/Wj9QsZi6RG67Xe.eMI0/siC.jwIVTbeX4Fy.TTUcskXgTZu',NULL,'2020-02-11 02:07:04','2020-02-11 02:09:26','[\"CUSTOMER\"]',NULL,NULL,NULL,NULL,'a935d636051d9dcc60ec53b2188014b1.jpg','ACTIVE',NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

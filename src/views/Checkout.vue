@@ -47,13 +47,13 @@
                 :key="'cart'+index"
                 >
                 <v-list-item-avatar>
-                    <v-img :src="getImage('/books/'+item.cover)"></v-img>
+                    <v-img :src="getImage('/destinations/'+item.cover)"></v-img>
                 </v-list-item-avatar>
 
                 <v-list-item-content>
                     <v-list-item-title v-html="item.title"></v-list-item-title>
                     <v-list-item-subtitle>
-                        Rp. {{ item.price.toLocaleString('id-ID') }} 
+                         {{ item.price.toLocaleString('id-ID') }} FJ$
                         <span style="float:right">
                         {{ item.quantity }}
                         </span> 
@@ -66,7 +66,7 @@
         <v-card-actions>
             Subtotal
             <v-spacer />
-            Rp. {{ totalPrice.toLocaleString('id-ID') }}
+            {{ totalPrice.toLocaleString('id-ID') }} FJ$
         </v-card-actions>
         </v-container>
         </v-card>

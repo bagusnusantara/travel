@@ -6,7 +6,7 @@
       <v-simple-table>
         <tr><th>Order ID</th><td>{{ payment.order_id }}</td></tr>
         <tr><th>Invoice Number</th><td>{{ payment.invoice_number }}</td></tr>
-        <tr><th>Total Bill</th><td>Rp. {{ payment.total_bill.toLocaleString('id-ID') }}</td></tr>
+        <tr><th>Total Bill</th><td>{{ payment.total_bill.toLocaleString('id-ID') }} FJ$</td></tr>
       </v-simple-table>
     </v-container>
     </v-card>
@@ -16,12 +16,16 @@
     <v-container>
       <v-simple-table>
         <tr>
-            <td><img src="img/bca.png"></td>
-            <td>BCA KCP abc No Rek 123</td>
+            <td><img src="img/bsp.png" width="100px"></td>
+            <td>Bank of the South Pacific <br>312433151512414 - Fiji Travel Domestic</td>
         </tr>
         <tr>
-            <td><img src="img/mandiri.png"></td>
-            <td>BANK MANDIRI KCP xyz No Rek 456</td>
+            <td><img src="img/anz.png" width="120px"></td>
+            <td>ANZ Bank <br>9090903151512414 - Fiji Travel Domestic</td>
+        </tr>
+        <tr>
+            <td><img src="img/westpac.jpg" width="120px"></td>
+            <td>Westpac Bank <br>7878913151512414 - Fiji Travel Domestic</td>
         </tr>
       </v-simple-table>
     </v-container>

@@ -22,11 +22,6 @@ Route::prefix('v1')->group(function () {
     Route::get('categories/random/{count}', 'CategoryController@random');
     Route::get('categories/slug/{slug}', 'CategoryController@slug');
 
-    Route::get('books', 'BookController@index');
-    Route::get('books/top/{count}', 'BookController@top');
-    Route::get('books/slug/{slug}', 'BookController@slug');
-    Route::get('books/search/{keyword}', 'BookController@search');
-
     Route::get('destinations', 'DestinationController@index');
     Route::get('destinations/top/{count}', 'DestinationController@top');
     Route::get('destinations/slug/{slug}', 'DestinationController@slug');

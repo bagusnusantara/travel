@@ -14,7 +14,7 @@
 
       <v-card-actions>
         <v-icon>mdi-cash</v-icon> 
-        <span class="orange--text"> Rp {{ destination.price.toLocaleString('id-ID') }} </span>
+        <span class="orange--text"> {{ destination.price.toLocaleString('id-ID') }} FJ$ </span>
         <v-spacer></v-spacer>
         <v-icon>mdi-eye</v-icon> {{ destination.views }}
       </v-card-actions>

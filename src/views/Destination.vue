@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <td><v-icon>mdi-cash</v-icon>  Price</td>
-                    <td class="orange--text">{{ destination.price.toLocaleString('id-ID')}} $</td>
+                    <td class="orange--text">{{ destination.price.toLocaleString('id-ID')}} FJ$</td>
                 </tr>
                 </tbody>
             </v-simple-table>
