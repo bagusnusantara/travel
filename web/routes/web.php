@@ -17,4 +17,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('Dashboard');
+    Route::get('/destinations', 'Admin\DestinationController@index')->name('Destinations');
+    Route::get('/destinations/get', 'Admin\DestinationController@getDestinations')->name('getDestinations');
+    Route::get('/destinations/create', 'Admin\DestinationController@create')->name('Destinations/Create');
+});
+
+Route::prefix('customer')->group(function () {
+    Route::get('/home', 'Customer\HomeController@index')->name('home');
+});
