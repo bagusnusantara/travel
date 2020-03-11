@@ -26,8 +26,9 @@ Route::prefix('v1')->group(function () {
     Route::get('destinations/top/{count}', 'DestinationController@top');
     Route::get('destinations/slug/{slug}', 'DestinationController@slug');
     Route::get('destinations/search/{keyword}', 'DestinationController@search');
+    Route::post('destinations/store', 'DestinationController@store');
 
-    Route::post('destinations/cart', 'BookController@cart');
+    Route::post('destinations/cart', 'DestinationController@cart');
 
     // auth
     Route::middleware(['auth:api'])->group(function () {

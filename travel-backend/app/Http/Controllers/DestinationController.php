@@ -57,7 +57,25 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $destination = Destination::create($request->all());
+        // $file = $request->file('cover');
+        // $tujuan_upload = 'images/destinations';
+        // $file->move($tujuan_upload,$file->getClientOriginalName());
+
+        // $destination = new Destination;
+        // $destination->title = $request->title;
+        // $destination->slug = str_slug($request->title);
+        // $destination->description = $request->description;
+        // $destination->price = $request->price;
+        // $destination->status = $request->status;
+        // $destination->cover = $file;
+        // $destination->save();
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'destinations',
+            'data' => $destination,
+        ], 200); 
     }
 
     /**

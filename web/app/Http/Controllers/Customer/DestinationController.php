@@ -8,7 +8,7 @@ use Gate;
 use App\Destination;
 use GuzzleHttp\Client;
 
-class HomeController extends Controller
+class DestinationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -40,6 +40,7 @@ class HomeController extends Controller
     public function slug($slug)
     {
         $show = Destination::where('slug', $slug)->first();
+        return view('customer.destinations.show',compact('show'));;
         // return new DestinationResource($slug);
     }
 }
