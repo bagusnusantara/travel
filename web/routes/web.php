@@ -21,13 +21,14 @@ Auth::routes();
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('Dashboard');
+    //destination
     Route::get('/destinations', 'Admin\DestinationController@index')->name('Destinations');
     Route::get('/destinations/get', 'Admin\DestinationController@getDestinations')->name('getDestinations');
     Route::get('/destinations/create', 'Admin\DestinationController@create')->name('Destinations/Create');
     Route::get('/destinations/edit/{slug}', 'Admin\DestinationController@edit')->name('Destinations/Edit');
     Route::post('/destinations/store', 'Admin\DestinationController@store')->name('Destinations/Store');
     Route::post('/destinations/update', 'Admin\DestinationController@update')->name('Destinations/Update');
-
+    //user
     Route::get('/users', 'Admin\UserController@index')->name('Users');
     Route::get('/users/get', 'Admin\UserController@getUsers')->name('getUsers');
 });

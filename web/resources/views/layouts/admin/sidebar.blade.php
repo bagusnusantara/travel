@@ -15,8 +15,7 @@
                     @can('isAdmin')
                     <li><a href=""><i class="ti-receipt"></i> <span>Payment History</span></a></li>
                     <li><a href="{{ url('admin/destinations') }}"><i class="ti-location-pin"></i> <span>Destinations</span></a></li>
-                    <li><a href="maps.html"><i class="ti-money"></i> <span>Price Management</span></a></li>
-                    <li><a href="invoice.html"><i class="ti-user"></i> <span>Users Management</span></a></li>
+                    <li><a href="{{ url('admin/users') }}"><i class="ti-user"></i> <span>Users Management</span></a></li>
                     @endcan
                 </ul>
             </nav>
