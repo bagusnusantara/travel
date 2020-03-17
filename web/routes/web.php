@@ -31,12 +31,26 @@ Route::prefix('admin')->group(function () {
     //user
     Route::get('/users', 'Admin\UserController@index')->name('Users');
     Route::get('/users/get', 'Admin\UserController@getUsers')->name('getUsers');
+    Route::get('/users/edit/{id}', 'Admin\UserController@edit')->name('Users/Edit');
+    Route::post('/users/update', 'Admin\UserController@update')->name('Users/Update');
+    //payments
+    Route::get('/payments', 'Admin\PaymentController@index')->name('Payments');
+    Route::get('/payments/get', 'Admin\PaymentController@getPayments')->name('getPayments');
+    Route::get('/payments/edit/{id}', 'Admin\PaymentController@edit')->name('Payments/Edit');
+    Route::post('/payments/update', 'Admin\PaymentController@update')->name('Payments/Update');
 });
 
 Route::prefix('customer')->group(function () {
+    Route::get('/my-profile', 'Customer\ProfileController@index')->name('profile');
     Route::get('/home', 'Customer\HomeController@index')->name('home');
     Route::get('/destinations/slug/{slug}', 'Customer\DestinationController@slug');
     Route::post('/cart-add', 'Customer\CartController@add')->name('cart.add');
     Route::get('/cart-checkout', 'Customer\CartController@cart')->name('cart.checkout');
     Route::post('/cart-clear', 'Customer\CartController@clear')->name('cart.clear');
+    Route::get('/about', function () {
+        return view('about');
+    });
+    Route::get('/contact', function () {
+        return view('contact');
+    });
 });

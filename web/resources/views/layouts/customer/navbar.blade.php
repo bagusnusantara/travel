@@ -7,13 +7,14 @@
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('login') }}">Destinations</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ url('customer/home') }}">Home</a></li>
+                    <li><a href="{{ url('customer/destinations') }}">Destinations</a></li>
+                    <li><a href="{{ url('customer/about') }}">About</a></li>
+                    <li><a href="{{ url('customer/contact') }}">Contact</a></li>
                     @auth
                     <li class="menu-has-children"><a href="#">{{ Auth::user()->name }}</a>
                         <ul>
+                            <li><a href="{{ url('/my-profile') }}">My Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
