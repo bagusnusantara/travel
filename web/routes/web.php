@@ -51,10 +51,10 @@ Route::prefix('customer')->group(function () {
     Route::get('/cart-checkout', 'Customer\CartController@cart')->name('cart.checkout');
     Route::post('/cart-clear', 'Customer\CartController@clear')->name('cart.clear');
     Route::get('/about', function () {
-        return view('about');
+        return view('customer.home.about');
     });
     Route::get('/contact', function () {
-        return view('contact');
+        return view('customer.home.contact');
     });
     Route::get('/destinations', 'Customer\DestinationController@index')->name('destinations');
 });
