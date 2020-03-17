@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/home', function () {
+    return redirect('customer/home');
+});
 Auth::routes();
 
 
@@ -44,6 +46,7 @@ Route::prefix('customer')->group(function () {
     Route::get('/my-profile', 'Customer\ProfileController@index')->name('profile');
     Route::get('/home', 'Customer\HomeController@index')->name('home');
     Route::get('/destinations/slug/{slug}', 'Customer\DestinationController@slug');
+    Route::get('/destinations/search/', 'Customer\DestinationController@search');
     Route::post('/cart-add', 'Customer\CartController@add')->name('cart.add');
     Route::get('/cart-checkout', 'Customer\CartController@cart')->name('cart.checkout');
     Route::post('/cart-clear', 'Customer\CartController@clear')->name('cart.clear');
@@ -53,4 +56,5 @@ Route::prefix('customer')->group(function () {
     Route::get('/contact', function () {
         return view('contact');
     });
+    Route::get('/destinations', 'Customer\DestinationController@index')->name('destinations');
 });

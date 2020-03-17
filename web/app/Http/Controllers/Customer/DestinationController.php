@@ -35,12 +35,22 @@ class DestinationController extends Controller
         $response = $request->getBody()->getContents();
         $destinations = json_decode($response, true);
         //dd($destinations['data'][0]['title']);
-        return view('customer.home.index',compact('destinations'));
+        return view('customer.destinations.index',compact('destinations'));
     }
     public function slug($slug)
     {
         $show = Destination::where('slug', $slug)->first();
         return view('customer.destinations.show',compact('show'));;
         // return new DestinationResource($slug);
+    }
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+        $destinations = Destination::select('*')
+            ->where('title', 'LIKE', "%".$keyword."%")
+            ->orderBy('views', 'DESC')
+            ->get();
+        //dd($destinations);
+        return view('customer.destinations.search',compact('destinations'));        
     }
 }
