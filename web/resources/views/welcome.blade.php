@@ -21,8 +21,9 @@
                         <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="false">Flights</a>
+                        <a class="nav-link" id="flight-tab" data-toggle="tab" href="#flight" role="tab" aria-controls="flight" aria-selected="false">Register</a>
                     </li>
+
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
@@ -34,7 +35,63 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="flight" role="tabpanel" aria-labelledby="flight-tab">
-                        <form class="form-wrap">
+                        <form method="POST" action="{{ route('register') }}" class="form-wrap">
+                            @csrf
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input id="name" placeholder="Name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
+
+                                    @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                            
+                                <div class="col-md-12">
+                                    <input id="email" placeholder="Email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+
+                                    @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+            
+
+                                <div class="col-md-12">
+                                    <input id="password" placeholder="Password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                    @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <div class="col-md-12"> 
+                                    <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="primary-btn text-uppercase">
+                                        {{ __('Register') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- <form class="form-wrap">
                             <input type="text" class="form-control" name="name" placeholder="From " onfocus="this.placeholder = ''" onblur="this.placeholder = 'From '">
                             <input type="text" class="form-control" name="to" placeholder="To " onfocus="this.placeholder = ''" onblur="this.placeholder = 'To '">
                             <input type="text" class="form-control date-picker" name="start" placeholder="Start " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Start '">
@@ -42,7 +99,7 @@
                             <input type="number" min="1" max="20" class="form-control" name="adults" placeholder="Adults " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adults '">
                             <input type="number" min="1" max="20" class="form-control" name="child" placeholder="Child " onfocus="this.placeholder = ''" onblur="this.placeholder = 'Child '">
                             <a href="#" class="primary-btn text-uppercase">Search flights</a>
-                        </form>
+                        </form> -->
                     </div>
 
                 </div>
@@ -52,243 +109,56 @@
 </section>
 <!-- End banner Area -->
 
-<!-- Start popular-destination Area -->
-<section class="popular-destination-area section-gap">
+<!-- Start blog Area -->
+<section class="recent-blog-area section-gap">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-70 col-lg-8">
+            <div class="menu-content pb-60 col-lg-9">
                 <div class="title text-center">
-                    <h1 class="mb-10">Popular Destinations</h1>
-                    <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, day.</p>
+                    <h1 class="mb-10">Popular Destination</h1>
+                    <p>This is the most popular destinations in Fiji.</p>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4">
-                <div class="single-destination relative">
-                    <div class="thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="{{ asset('template/img/d1.jpg') }}" alt="">
+
+            <div class="active-recent-blog-carusel">
+                @php
+                $i=0;
+                @endphp
+                @foreach($destinations as $destination)
+
+                <div class="single-recent-blog-post item">
+                    <div class="thumb">
+                        <img style="height:200px;" class="img-fluid" src="http://travel-backend.local/images/destinations/{{ $destinations['data'][$i]['cover'] }}" alt="">
                     </div>
-                    <div class="desc">
-                        <a href="#" class="price-btn">$150</a>
-                        <h4>Mountain River</h4>
-                        <p>Paraguay</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-destination relative">
-                    <div class="thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="{{ asset('template/img/d2.jpg') }}" alt="">
-                    </div>
-                    <div class="desc">
-                        <a href="#" class="price-btn">$250</a>
-                        <h4>Dream City</h4>
-                        <p>Paris</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-destination relative">
-                    <div class="thumb relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src="{{ asset('template/img/d3.jpg') }}" alt="">
-                    </div>
-                    <div class="desc">
-                        <a href="#" class="price-btn">$350</a>
-                        <h4>Cloud Mountain</h4>
-                        <p>Sri Lanka</p>
+                    <div class="details">
+                        <div class="tags">
+                            <ul>
+                                <li>
+                                    <a>{{ number_format($destinations['data'][$i]['price']) }} FJ$</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="customer/destinations/slug/{{ $destinations['data'][$i]['slug'] }}">
+                            <h4 class="title">{{ $destinations['data'][$i]['title'] }}</h4>
+                        </a>
+                        <p>
+                            {{ $destinations['data'][$i]['description'] }}
+                        </p>
                     </div>
                 </div>
+                @php
+                $i++;
+                @endphp
+                @endforeach
+
+
             </div>
         </div>
     </div>
 </section>
-<!-- End popular-destination Area -->
-
-
-<!-- Start price Area -->
-<section class="price-area section-gap">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-70 col-lg-8">
-                <div class="title text-center">
-                    <h1 class="mb-10">We Provide Affordable Prices</h1>
-                    <p>Well educated, intellectual people, especially scientists at all times demonstrate considerably.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="single-price">
-                    <h4>Cheap Packages</h4>
-                    <ul class="price-list">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>New York</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Maldives</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Sri Lanka</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Nepal</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Thiland</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Singapore</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-price">
-                    <h4>Luxury Packages</h4>
-                    <ul class="price-list">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>New York</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Maldives</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Sri Lanka</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Nepal</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Thiland</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Singapore</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-price">
-                    <h4>Camping Packages</h4>
-                    <ul class="price-list">
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>New York</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Maldives</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Sri Lanka</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Nepal</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Thiland</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                        <li class="d-flex justify-content-between align-items-center">
-                            <span>Singapore</span>
-                            <a href="#" class="price-btn">$1500</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End price Area -->
-
-
-<!-- Start other-issue Area -->
-<section class="other-issue-area section-gap">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-70 col-lg-9">
-                <div class="title text-center">
-                    <h1 class="mb-10">Other issues we can help you with</h1>
-                    <p>We all live in an age that belongs to the young at heart. Life that is.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-other-issue">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/o1.jpg') }}" alt="">
-                    </div>
-                    <a href="#">
-                        <h4>Rent a Car</h4>
-                    </a>
-                    <p>
-                        The preservation of human life is the ultimate value, a pillar of ethics and the foundation.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-other-issue">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/o2.jpg') }}" alt="">
-                    </div>
-                    <a href="#">
-                        <h4>Cruise Booking</h4>
-                    </a>
-                    <p>
-                        I was always somebody who felt quite sorry for myself, what I had not got compared.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-other-issue">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/o3.jpg') }}" alt="">
-                    </div>
-                    <a href="#">
-                        <h4>To Do List</h4>
-                    </a>
-                    <p>
-                        The following article covers a topic that has recently moved to center stage–at least it seems.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-other-issue">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/o4.jpg') }}" alt="">
-                    </div>
-                    <a href="#">
-                        <h4>Food Features</h4>
-                    </a>
-                    <p>
-                        There are many kinds of narratives and organizing principles. Science is driven by evidence.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End other-issue Area -->
-
+<!-- End recent-blog Area -->
 
 <!-- Start testimonial Area -->
 <section class="testimonial-area section-gap">
@@ -419,168 +289,4 @@
 
 
 
-
-<!-- Start blog Area -->
-<section class="recent-blog-area section-gap">
-    <div class="container">
-        <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-60 col-lg-9">
-                <div class="title text-center">
-                    <h1 class="mb-10">Latest from Our Blog</h1>
-                    <p>With the exception of Nietzsche, no other madman has contributed so much to human sanity as has.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="active-recent-blog-carusel">
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b1.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">Low Cost Advertising</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b2.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">Creative Outdoor Ads</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b3.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">It's Classified How To Utilize Free</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b1.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">Low Cost Advertising</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b2.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">Creative Outdoor Ads</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-                <div class="single-recent-blog-post item">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('template/img/b3.jpg') }}" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="tags">
-                            <ul>
-                                <li>
-                                    <a href="#">Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">Life Style</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <a href="#">
-                            <h4 class="title">It's Classified How To Utilize Free</h4>
-                        </a>
-                        <p>
-                            Acres of Diamonds… you’ve read the famous story, or at least had it related to you. A farmer.
-                        </p>
-                        <h6 class="date">31st January,2018</h6>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End recent-blog Area -->
 @endsection

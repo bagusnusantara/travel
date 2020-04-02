@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->api_url = 'travel-backend.local/v1/';
     }
 
@@ -41,5 +41,16 @@ class HomeController extends Controller
     {
         $show = Destination::where('slug', $slug)->first();
         // return new DestinationResource($slug);
+    }
+    public function guest()
+    {
+        //$destinations = Destination::all();
+        $client = new Client();
+        $url =  $this->api_url . 'destinations';
+        $request = $client->get($url);
+        $response = $request->getBody()->getContents();
+        $destinations = json_decode($response, true);
+        //dd($destinations['data'][0]['title']);
+        return view('welcome',compact('destinations'));
     }
 }

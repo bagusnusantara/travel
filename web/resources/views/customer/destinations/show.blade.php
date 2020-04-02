@@ -33,11 +33,16 @@
                         <li>Price : {{ number_format($show->price) }} FJ$ </li>
                         <li>Available Tickets : {{ $show->stock }}</li>
                         <li>
+                            @auth
                             <form method="POST" action="{{route('cart.add')}}" class="form-inline my-2 my-lg-0">
                                 @csrf
                                 <input name="id" type="hidden" value="{{$show->id}}">
                                 <button class="btn btn-success btn-block" type="submit">Add to cart</button>
                             </form>
+                            @endauth
+                            @guest
+                                <a type="button" href="{{ url('/') }}" class="btn btn-success btn-block">Book the destination</a>
+                            @endguest
                         </li>
                     </ul>
                 </div>

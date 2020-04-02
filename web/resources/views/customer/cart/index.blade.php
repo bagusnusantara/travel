@@ -62,7 +62,7 @@
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
                                 <div>
                                     <h6 class="my-0">{{$product->name}}</h6>
-                                    <small class="text-muted">{{$product->quantity . ' x $' . $product->price}}</small>
+                                    <small class="text-muted">{{$product->quantity . ' x FJ$' . $product->price}}</small>
                                 </div>
                                 <span class="text-muted">{{'$' . $product->price * $product->quantity}}</span>
                             </li>
@@ -83,7 +83,7 @@
                         <form method="POST" action="" class="card p-2">
                             <div class="input-group">
                                 <div class="input-group">
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to payment</button>
                                 </div>
                             </div>
                         </form>

@@ -17,7 +17,7 @@ class DestinationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->api_url = 'travel-backend.local/v1/';
     }
 

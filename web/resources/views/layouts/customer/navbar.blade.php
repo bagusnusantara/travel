@@ -7,10 +7,15 @@
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
+                    @auth
                     <li><a href="{{ url('customer/home') }}">Home</a></li>
+                    @endauth
+                    @guest
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    @endguest
                     <li><a href="{{ url('customer/destinations') }}">Destinations</a></li>
-                    <li><a href="{{ url('customer/about') }}">About</a></li>
-                    <li><a href="{{ url('customer/contact') }}">Contact</a></li>
+                    <li><a href="{{ url('about') }}">About</a></li>
+                    <li><a href="{{ url('contact') }}">Contact</a></li>
                     @auth
                     <li class="menu-has-children"><a href="#">{{ Auth::user()->name }}</a>
                         <ul>

@@ -10,10 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/', 'Customer\HomeController@guest')->name('guest');
 Route::get('/home', function () {
     return redirect('customer/home');
 });
@@ -50,11 +51,15 @@ Route::prefix('customer')->group(function () {
     Route::post('/cart-add', 'Customer\CartController@add')->name('cart.add');
     Route::get('/cart-checkout', 'Customer\CartController@cart')->name('cart.checkout');
     Route::post('/cart-clear', 'Customer\CartController@clear')->name('cart.clear');
-    Route::get('/about', function () {
-        return view('customer.home.about');
-    });
-    Route::get('/contact', function () {
-        return view('customer.home.contact');
-    });
+    Route::get('/cart-payment', 'Customer\CartController@payment')->name('cart.payment');
     Route::get('/destinations', 'Customer\DestinationController@index')->name('destinations');
+});
+Route::get('/about', function () {
+    return view('customer.home.about');
+});
+Route::get('/contact', function () {
+    return view('customer.home.contact');
+});
+Route::get('/ticket', function () {
+    return view('customer.tickets.index');
 });
