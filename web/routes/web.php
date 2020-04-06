@@ -51,7 +51,9 @@ Route::prefix('customer')->group(function () {
     Route::post('/cart-add', 'Customer\CartController@add')->name('cart.add');
     Route::get('/cart-checkout', 'Customer\CartController@cart')->name('cart.checkout');
     Route::post('/cart-clear', 'Customer\CartController@clear')->name('cart.clear');
-    Route::get('/cart-payment', 'Customer\CartController@payment')->name('cart.payment');
+    // Route::get('/cart-payment', function(){ 
+    //     return view('customer.cart.payment');});
+    Route::post('/cart-payment', 'Customer\CartController@payment')->name('cart.payment');
     Route::get('/destinations', 'Customer\DestinationController@index')->name('destinations');
 });
 Route::get('/about', function () {

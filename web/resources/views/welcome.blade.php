@@ -113,10 +113,13 @@
 <section class="recent-blog-area section-gap">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="menu-content pb-60 col-lg-9">
+            <div class="menu-content pb-20 col-lg-12">
                 <div class="title text-center">
                     <h1 class="mb-10">Popular Destination</h1>
                     <p>This is the most popular destinations in Fiji.</p>
+                </div>
+                <div class="text-right">
+                    <a href="{{ url('customer/destinations')}}"><h5>All destinations ></h5></a>
                 </div>
             </div>
         </div>

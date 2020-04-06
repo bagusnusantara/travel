@@ -80,9 +80,15 @@
                                 </div>
                             </div>
                         </form>
-                        <form method="POST" action="" class="card p-2">
+                        <form method="POST" action="{{ url('customer/cart-payment')}}" class="card p-2">
+                            @csrf
                             <div class="input-group">
                                 <div class="input-group">
+                                    <input type="hidden" name="total_bill" value="{{Cart::getSubTotal()}}">
+                                    @foreach(Cart::getContent() as $product)
+                                    <input type="text" name="destination_id[]" value="{{$product->id}}">
+                                    <input type="text" name="quantity[]" value="{{$product->quantity}}">
+                                    @endforeach
                                     <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to payment</button>
                                 </div>
                             </div>

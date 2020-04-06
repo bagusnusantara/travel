@@ -10,7 +10,7 @@
 <div class="ticket">
   <div class="stub">
     <div class="top">
-      <span class="admit">E-ticket</span>
+      <span class="admit">E-ticket  </span>
       <span class="line"></span>
       <span class="num">
         Fiji Travel Domestic
