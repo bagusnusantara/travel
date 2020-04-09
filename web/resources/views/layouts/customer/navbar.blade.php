@@ -17,6 +17,7 @@
                     <li><a href="{{ url('about') }}">About</a></li>
                     <li><a href="{{ url('contact') }}">Contact</a></li>
                     @auth
+                    <li><a href="{{ url('customer/my-tickets') }}">My Tickets</a></li>
                     <li class="menu-has-children"><a href="#">{{ Auth::user()->name }}</a>
                         <ul>
                             <li><a href="{{ url('/my-profile') }}">My Profile</a></li>

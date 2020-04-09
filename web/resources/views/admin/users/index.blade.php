@@ -19,12 +19,12 @@
                         <thead class="bg-light text-capitalize">
                             <tr>
                                 <th>ID</th>
+                                <th>Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Roles</th>
                                 <th>Address</th>
                                 <th>Phone</th>
-                                <th>Avatar</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -57,6 +57,13 @@
                     name: 'id'
                 },
                 {
+                    data: 'avatar',
+                    name: 'avatar',
+                    render: function( data, type, full, meta ) {
+                    return "<img style=\"border-radius: 50%;width:50px;\" src=\"http://travel-backend.local/images/users/" + data + "\" height=\"15\"  alt='No Image'/>";
+                },
+            },
+                {
                     data: 'name',
                     name: 'name'
                 },
@@ -76,10 +83,8 @@
                     data: 'phone',
                     name: 'phone'
                 },
-                {
-                    data: 'avatar',
-                    name: 'avatar'
-                },
+                
+
                 {
                     data: 'status',
                     name: 'status'

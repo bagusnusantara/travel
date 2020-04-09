@@ -42,7 +42,7 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="col-lg-9  col-md-6 col-sm-6">
                     <div class="single-footer-widget">
                         <h6>About Fiji Travel Domestic</h6>
                         <p>

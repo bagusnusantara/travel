@@ -32,7 +32,14 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('admin.payments.index');
+        $orders = DB::table('orders')->join('users','orders.user_id','users.id')->select('orders.*', 'users.name', 'users.email','users.phone')->orderByDesc('id')->get();
+        return view('admin.payments.index',compact('orders'));
+    }
+    public function show($invoice_number){
+        //$data = Order::where('invoice_number', $invoice_number)->first();
+        $data = DB::table('orders')->join('users','orders.user_id','users.id')->select('orders.*', 'users.name', 'users.email','users.phone')->where('invoice_number', $invoice_number)->first();
+        $detail= DB::table('destination_order')->join('destinations','destination_order.destination_id','destinations.id')->select('destination_order.*', 'destinations.title','destinations.price')->where('order_id', $data->id)->get();
+        return view('admin.payments.show',compact('data','detail'));
     }
     public function getpayments()
     {

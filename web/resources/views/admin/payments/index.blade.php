@@ -13,23 +13,32 @@
     <div class="col-12 mt-5">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Users List</h4>
+                <h4 class="header-title">Payment List</h4>
                 <div class="data-tables">
-                    <table id="users-table">
+                    <table id="dataTable3">
                         <thead class="bg-light text-capitalize">
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Address</th>
-                                <th>Phone</th>
-                                <th>Avatar</th>
-                                <th>Status</th>
+                            <td>Invoice Number</td>
+                        <td>Username </td>
+                        <td>Email </td>
+                        <td>Phone </td>
+                        <td>Total Bill</td>
+                        <td>Date</td>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($orders as $order)
+                        <tr>
+                            <td>{{$order->invoice_number}}</td>
+                            <td>{{$order->name}}</td>
+                            <td>{{$order->email}}</td>
+                            <td>{{$order->phone}}</td>
+                            <td>{{number_format($order->total_bill)}} FJ$</td>
+                            <td>{{$order->created_at}}</td>
+                            <td><a type="button" href="payments/show/{{$order->invoice_number}}" class="btn btn-primary">Show</a></td>
+                        </tr>
+                        @endforeach
 
                         </tbody>
                     </table>
@@ -46,52 +55,5 @@
 <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-<script>
-    $(function() {
-        $('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ url('/admin/users/get') }}',
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'roles',
-                    name: 'roles'
-                },
-                {
-                    data: 'address',
-                    name: 'address'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
-                },
-                {
-                    data: 'avatar',
-                    name: 'avatar'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action', 
-                    name: 'action', 
-                    orderable: false,
-                    searchable: false
-                },
-            ]
-        });
-    });
-</script>
+
 @endsection

@@ -130,8 +130,31 @@
                 $i=0;
                 @endphp
                 @foreach($destinations as $destination)
+                <div>
+                <div class="single-destinations">
+                <a href="customer/destinations/slug/{{ $destinations['data'][$i]['slug'] }}">
+                    <div class="thumb">
+                        <img style="height:200px;" src="http://travel-backend.local/images/destinations/{{ $destinations['data'][$i]['cover'] }}" alt="">
+                    </div>
+                    <div class="details">
+                        <h4 class="d-flex justify-content-between">
+                            <span>{{ $destinations['data'][$i]['title'] }}</span>
+                            <div class="star">
+                            <a href="#" class="price-btn">{{ number_format($destinations['data'][$i]['price']) }} FJ$</a>
+                            </div>
+                            
+                        </h4>
+                        <ul class="package-list">
+                            <li class="d-flex justify-content-between align-items-justify">
+                                <span>{{ str_limit($destinations['data'][$i]['description'],300)  }}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </a>
+            </div>
 
-                <div class="single-recent-blog-post item">
+                <!-- < <div class="single-recent-blog-post item">
                     <div class="thumb">
                         <img style="height:200px;" class="img-fluid" src="http://travel-backend.local/images/destinations/{{ $destinations['data'][$i]['cover'] }}" alt="">
                     </div>
@@ -150,7 +173,7 @@
                             {{ $destinations['data'][$i]['description'] }}
                         </p>
                     </div>
-                </div>
+                </div>  -->
                 @php
                 $i++;
                 @endphp

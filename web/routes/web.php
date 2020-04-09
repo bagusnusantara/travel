@@ -38,6 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/users/update', 'Admin\UserController@update')->name('Users/Update');
     //payments
     Route::get('/payments', 'Admin\PaymentController@index')->name('Payments');
+    Route::get('/payments/show/{invoice_number}', 'Admin\PaymentController@show')->name('showPayments');
     Route::get('/payments/get', 'Admin\PaymentController@getPayments')->name('getPayments');
     Route::get('/payments/edit/{id}', 'Admin\PaymentController@edit')->name('Payments/Edit');
     Route::post('/payments/update', 'Admin\PaymentController@update')->name('Payments/Update');
@@ -45,6 +46,8 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('customer')->group(function () {
     Route::get('/my-profile', 'Customer\ProfileController@index')->name('profile');
+    Route::get('/my-tickets', 'Customer\TicketController@index')->name('tickets');
+    Route::get('/my-tickets/show/{invoice_number}', 'Customer\TicketController@show')->name('showTickets');
     Route::get('/home', 'Customer\HomeController@index')->name('home');
     Route::get('/destinations/slug/{slug}', 'Customer\DestinationController@slug');
     Route::get('/destinations/search/', 'Customer\DestinationController@search');

@@ -42,26 +42,17 @@
                         <h4 class="d-flex justify-content-between">
                             <span>{{ $destinations['data'][$i]['title'] }}</span>
                             <div class="star">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                            <a href="#" class="price-btn">{{ number_format($destinations['data'][$i]['price']) }} FJ$</a>
                             </div>
                         </h4>
                         <ul class="package-list">
                             <li class="d-flex justify-content-between align-items-center">
                                 <span>{{ str_limit($destinations['data'][$i]['description'],100)  }}</span>
                             </li>
-                            
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span>Price</span>
-                                <a href="#" class="price-btn">{{ number_format($destinations['data'][$i]['price']) }} FJ$</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
-</a>
+                </a>
             </div>
             @php
             $i++;
