@@ -59,6 +59,7 @@
             @endphp
             @endforeach
         </div>
+
     </div>
 </section>
 <!-- End destinations Area -->

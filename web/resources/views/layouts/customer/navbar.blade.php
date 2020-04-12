@@ -20,7 +20,7 @@
                     <li><a href="{{ url('customer/my-tickets') }}">My Tickets</a></li>
                     <li class="menu-has-children"><a href="#">{{ Auth::user()->name }}</a>
                         <ul>
-                            <li><a href="{{ url('/my-profile') }}">My Profile</a></li>
+                            <li><a href="{{ url('customer/my-profile') }}">My Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>

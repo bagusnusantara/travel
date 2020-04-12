@@ -24,14 +24,14 @@
             $i=0;
             @endphp
             @foreach($orders as $d)
-            <div class="col-lg-12">
+            <div class="col-lg-9">
                 <div class="single-destinations">
                 <a href="my-tickets/show/{{$d->invoice_number}}">
                     <div class="details">
                         <h4 class="d-flex justify-content-between">
                         <span><img src="{{ asset('template/img/ticket.png') }}" alt="Smiley face"></span>
                             <div>
-                            <h4>INVOICE NUMBER :</h4> <a href="#" class="price-btn">{{$d->invoice_number}} FJ$</a>
+                            <h4>INVOICE NUMBER :</h4> <a class="price-btn">{{$d->invoice_number}}</a>
                             </div>
                         </h4>
                     </div>
@@ -42,6 +42,11 @@
             $i++;
             @endphp
             @endforeach
+        </div>
+        <div class="pull-left mt-5">
+            <ul>
+                {{ $orders->links() }}
+            </ul>
         </div>
     </div>
 </section>

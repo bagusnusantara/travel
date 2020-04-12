@@ -39,7 +39,7 @@ class UserController extends Controller
         $users = User::all();
         return Datatables::of($users)
             ->addColumn('action', function ($users) {
-                return '<a href="edit/' . $users->id . '" class="btn btn-primary btn-xs mb-3"><span class="ti-pencil-alt"></span> Edit</a>';
+                return '<a href="users/edit/' . $users->id . '" class="btn btn-primary btn-xs mb-3"><span class="ti-pencil-alt"></span> Edit</a>';
             })
             ->removeColumn('views')
             ->make(true);
@@ -79,6 +79,6 @@ class UserController extends Controller
         //dd($request->cover);
         
         
-        return redirect()->route('Users');
+        return redirect()->back();
     }
 }

@@ -9,7 +9,9 @@
     <div class="col-12 mt-5">
         <div class="card">
             <div class="card-body">
-
+                <div class="text-center">
+                    <img style="border-radius: 50%;width:150px;height:150px;" src="http://travel-backend.local/images/users/{{ $data->avatar }}" alt="avatar">
+                </div>
                 <form method="POST" action="{{ url('admin/users/update')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
@@ -27,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="example-text-input" class="col-form-label">Phone</label>
-                        <input class="form-control" type="text" name="phone" id="example-text-input" value="{{ $data->phone }}">
+                        <input class="form-control" type="number" name="phone" id="example-text-input" value="{{ $data->phone }}">
                     </div>
                     <div class="form-group">
                         <label class="col-form-label">Roles</label>
@@ -41,32 +43,20 @@
                             @endif
                         </select>
                     </div>
-                    <!-- <div class="form-group">
-                        <label class="col-form-label">Status</label>
-                        <select class="form-control" name="status">
-                            @if($data->status == 'ACTIVE')
-                            <option value="ACTIVE" selected>Active</option>
-                            <option value="INACTIVE">Inactive</option>
-                            @else if($data->status == 'INACTIVE')
-                            <option value="ACTIVE">Active</option>
-                            <option value="INACTIVE" selected>Inactive</option>
-                            @endif
-                        </select>
-                    </div> -->
-                   
+
                     <div class="form-group">
                         <label class="col-form-label">Avatar</label>
 
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="cover">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" name="avatar">
                             <label class="custom-file-label" for="inputGroupFile01">Change Picture</label>
                         </div>
-                        <div class="col-lg-6 text-center">
+                        <!-- <div class="col-lg-6 text-center">
                             <br><img class="img-fluid" src="http://travel-backend.local/images/users/{{ $data->avatar }}" alt="">
-                        </div>
+                        </div> -->
                     </div>
                     <div class="text-center">
-                        <input type="submit" class="btn btn-primary btn-sm mb-3" value="Save Destination"><br>
+                        <input type="submit" class="btn btn-primary btn-sm mb-3" value="Save"><br>
                         <a href="{{ url('admin/users/') }}" type="button" class="btn btn-light btn-xs mb-3"><span class="ti-back-left"></span> Back</a>
                     </div>
                 </form>

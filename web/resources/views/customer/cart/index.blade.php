@@ -7,7 +7,7 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Checkout
+                    Cart
                 </h1>
             </div>
         </div>
@@ -64,7 +64,7 @@
                                     <h6 class="my-0">{{$product->name}}</h6>
                                     <small class="text-muted">{{$product->quantity . ' x FJ$' . $product->price}}</small>
                                 </div>
-                                <span class="text-muted">{{'$' . $product->price * $product->quantity}}</span>
+                                <span class="text-muted">{{'FJ$' . $product->price * $product->quantity}}</span>
                             </li>
                             @endforeach
                             <li class="list-group-item d-flex justify-content-between">
@@ -86,8 +86,8 @@
                                 <div class="input-group">
                                     <input type="hidden" name="total_bill" value="{{Cart::getSubTotal()}}">
                                     @foreach(Cart::getContent() as $product)
-                                    <input type="text" name="destination_id[]" value="{{$product->id}}">
-                                    <input type="text" name="quantity[]" value="{{$product->quantity}}">
+                                    <input type="hidden" name="destination_id[]" value="{{$product->id}}">
+                                    <input type="hidden" name="quantity[]" value="{{$product->quantity}}">
                                     @endforeach
                                     <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to payment</button>
                                 </div>

@@ -34,6 +34,7 @@
             $i=0;
             @endphp
             @foreach($destinations as $destination)
+            
             <div class="col-lg-4">
                 <div class="single-destinations">
                 <a href="slug/{{ $destination->slug }}">
@@ -44,11 +45,7 @@
                         <h4 class="d-flex justify-content-between">
                             <span>{{ $destination['title'] }}</span>
                             <div class="star">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
+                            <a href="#" class="price-btn">{{ number_format($destination->price) }} FJ$</a>
                             </div>
                         </h4>
                         <ul class="package-list">
@@ -56,21 +53,18 @@
                                 <span>{{ str_limit($destination['description'],100)  }}</span>
                             </li>
                             
-                            <li class="d-flex justify-content-between align-items-center">
-                                <span>Price</span>
-                                <a href="#" class="price-btn">{{ number_format($destination['price']) }} FJ$</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
 </a>
-            </div>
-            @php
-            $i++;
-            @endphp
-            @endforeach
+
         </div>
-        @endif
+        @php
+        $i++;
+        @endphp
+        @endforeach
+    </div>
+    @endif
     </div>
 </section>
 <!-- End destinations Area -->

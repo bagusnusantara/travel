@@ -60,7 +60,7 @@
                     data: 'avatar',
                     name: 'avatar',
                     render: function( data, type, full, meta ) {
-                    return "<img style=\"border-radius: 50%;width:50px;\" src=\"http://travel-backend.local/images/users/" + data + "\" height=\"15\"  alt='No Image'/>";
+                    return "<img style=\"border-radius: 50%;width:50px;height:50px;\" src=\"http://travel-backend.local/images/users/" + data + "\" height=\"15\"  alt='No Image'/>";
                 },
             },
                 {
