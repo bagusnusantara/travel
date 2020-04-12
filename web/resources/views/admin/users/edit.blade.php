@@ -51,9 +51,6 @@
                             <input type="file" class="custom-file-input" id="inputGroupFile01" name="avatar">
                             <label class="custom-file-label" for="inputGroupFile01">Change Picture</label>
                         </div>
-                        <!-- <div class="col-lg-6 text-center">
-                            <br><img class="img-fluid" src="http://travel-backend.local/images/users/{{ $data->avatar }}" alt="">
-                        </div> -->
                     </div>
                     <div class="text-center">
                         <input type="submit" class="btn btn-primary btn-sm mb-3" value="Save"><br>

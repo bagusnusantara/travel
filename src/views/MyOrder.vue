@@ -8,7 +8,7 @@
             <tr v-for="item in items" :key="item.id">
                 <td>
                     Invoice: {{ item.invoice_number }}
-                    <div class="primary--text title">Rp. {{ item.total_bill.toLocaleString('id-ID') }}</div>
+                    <div class="primary--text title"> {{ item.total_bill.toLocaleString('id-ID') }} FJ$</div>
                     <small>date: {{ item.updated_at }}</small>
                 </td>
                 <td>

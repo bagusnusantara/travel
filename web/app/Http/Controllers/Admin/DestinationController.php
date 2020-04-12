@@ -55,7 +55,6 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $client = new Client();
-        // dd($request->cover->getClientOriginalName());
 
         $response = $client->request('POST', $this->api_url . 'destinations/store', [
             'form_params' => [
@@ -65,7 +64,6 @@ class DestinationController extends Controller
                 'status' => $request->status,
                 'price' => $request->price,
                 'cover' => $request->cover->getClientOriginalName(),
-                // 'cover' => base64_encode(file_get_contents($request->file('cover')->path('/images/destinations/'))),
             ]
         ]);
         $file = $request->file('cover');
