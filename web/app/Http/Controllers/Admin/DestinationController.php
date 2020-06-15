@@ -55,7 +55,13 @@ class DestinationController extends Controller
     public function store(Request $request)
     {
         $client = new Client();
-
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'status' => 'required',
+            'price' => 'required',
+            'cover' => 'required',
+        ]);
         $response = $client->request('POST', $this->api_url . 'destinations/store', [
             'form_params' => [
                 'title' => $request->title,
@@ -63,6 +69,7 @@ class DestinationController extends Controller
                 'description' => $request->description,
                 'status' => $request->status,
                 'price' => $request->price,
+                'stock' => 50,
                 'cover' => $request->cover->getClientOriginalName(),
             ]
         ]);

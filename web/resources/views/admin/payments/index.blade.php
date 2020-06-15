@@ -18,27 +18,27 @@
                     <table id="dataTable3">
                         <thead class="bg-light text-capitalize">
                             <tr>
-                            <td>Invoice Number</td>
-                        <td>Username </td>
-                        <td>Email </td>
-                        <td>Phone </td>
-                        <td>Total Bill</td>
-                        <td>Date</td>
+                                <td>Invoice Number</td>
+                                <td>Username </td>
+                                <td>Email </td>
+                                <td>Phone </td>
+                                <td>Total Bill</td>
+                                <td>Date</td>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($orders as $order)
-                        <tr>
-                            <td>{{$order->invoice_number}}</td>
-                            <td>{{$order->name}}</td>
-                            <td>{{$order->email}}</td>
-                            <td>{{$order->phone}}</td>
-                            <td>{{number_format($order->total_bill)}} FJ$</td>
-                            <td>{{$order->created_at}}</td>
-                            <td><a type="button" href="payments/show/{{$order->invoice_number}}" class="btn btn-primary">Show</a></td>
-                        </tr>
-                        @endforeach
+                            @foreach($orders as $order)
+                            <tr>
+                                <td>{{$order->invoice_number}}</td>
+                                <td>{{$order->name}}</td>
+                                <td>{{$order->email}}</td>
+                                <td>{{$order->phone}}</td>
+                                <td>{{number_format($order->total_bill)}} FJ$</td>
+                                <td>{{$order->created_at}}</td>
+                                <td><a type="button" href="payments/show/{{$order->invoice_number}}" class="btn btn-primary">Show</a></td>
+                            </tr>
+                            @endforeach
 
                         </tbody>
                     </table>

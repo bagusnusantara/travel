@@ -9,13 +9,13 @@
         <div class="menu-inner">
             <nav>
                 <ul class="metismenu" id="menu">
-                    <li class="active">
+                    <li class="{{ request()->is('admin/dashboard') ? ' active' : '' }}">
                         <a href="{{ url('admin/dashboard') }}" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
                     </li>
                     @can('isAdmin')
-                    <li><a href="{{ url('admin/payments') }}"><i class="ti-receipt"></i> <span>Payment History</span></a></li>
-                    <li><a href="{{ url('admin/destinations') }}"><i class="ti-location-pin"></i> <span>Destinations</span></a></li>
-                    <li><a href="{{ url('admin/users') }}"><i class="ti-user"></i> <span>Users Management</span></a></li>
+                    <li class="{{ request()->is('admin/payments') ? ' active' : '' }}"><a  href="{{ url('admin/payments') }}"><i class="ti-receipt"></i> <span>Payment History</span></a></li>
+                    <li class="{{ request()->is('admin/destinations') ? ' active' : '' }}"><a href="{{ url('admin/destinations') }}"><i class="ti-location-pin"></i> <span>Destinations</span></a></li>
+                    <li class="{{ request()->is('admin/users') ? ' active' : '' }}"><a href="{{ url('admin/users') }}"><i class="ti-user"></i> <span>Users Management</span></a></li>
                     @endcan
                 </ul>
             </nav>

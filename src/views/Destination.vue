@@ -16,10 +16,6 @@
             <v-simple-table dense>
                 <tbody>
                 <tr>
-                    <td><v-icon>mdi-google-maps</v-icon> Location</td>
-                    <td>Suva</td>
-                </tr>
-                <tr>
                     <td><v-icon>mdi-ticket</v-icon> Available Tickets</td>
                     <td>{{ destination.stock}}</td>
                 </tr>
@@ -50,7 +46,7 @@
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => ({
-    destination: {}, // objek destination
+    destination: {}, 
   }),
   created(){
     this.go()

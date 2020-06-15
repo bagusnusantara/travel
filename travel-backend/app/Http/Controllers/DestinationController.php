@@ -17,7 +17,7 @@ class DestinationController extends Controller
      */
     public function index()
     {
-        $criteria = Destination::paginate(6);
+        $criteria = Destination::paginate(10);
         return new DestinationResourceCollection($criteria);
     }
 

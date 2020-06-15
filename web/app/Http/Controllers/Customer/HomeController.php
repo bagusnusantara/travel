@@ -28,13 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$destinations = Destination::all();
+        
         $client = new Client();
         $url =  $this->api_url . 'destinations';
         $request = $client->get($url);
         $response = $request->getBody()->getContents();
         $destinations = json_decode($response, true);
-        //dd($destinations['data'][0]['title']);
+        //$destinations = Destination::all();
+        //dd($destinations);
         return view('customer.home.index',compact('destinations'));
     }
     public function slug($slug)

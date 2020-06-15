@@ -11,6 +11,7 @@ use App\Order;
 use DB;
 class DashboardController extends Controller
 {
+    private $api_url;
     /**
      * Create a new controller instance.
      *
@@ -19,6 +20,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->api_url = 'travel-backend.local/v1/';
     }
 
     /**
@@ -34,8 +36,10 @@ class DashboardController extends Controller
         $orders = DB::table('orders')->select(DB::raw('SUM(total_bill) as total'),DB::raw('EXTRACT(MONTH FROM created_at) AS months'))
         ->groupBy('months')
         ->get();
+        
         //$latest_orders = Order::orderBy('id','DESC')->paginate(5);
-        $latest_orders = DB::table('orders')->join('users','orders.user_id','users.id')->select('orders.*', 'users.name', 'users.email','users.phone')->paginate(5);
+        $latest_orders = DB::table('orders')->join('users','orders.user_id','users.id')->select('orders.*', 'users.name', 'users.email','users.phone')->orderBy('orders.created_at','desc')->paginate(5);
+        //dd($latest_orders);
         return view('admin.dashboard.index',compact('total_users','total_destinations','total_orders','orders','latest_orders'));
     }
 }
