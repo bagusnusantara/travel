@@ -66,10 +66,10 @@ class AuthController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'roles'    => json_encode(['CUSTOMER']),
+                'roles'    => 'CUSTOMER',
             ]);
             if($user){
-                Auth::login($user);
+                //Auth::login($user);
                 $user->generateToken();
                 $status = "success";
                 $message = "register successfully";
