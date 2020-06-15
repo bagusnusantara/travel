@@ -115,7 +115,7 @@ class ShopController extends Controller
 
         $user = Auth::user();
         if($user){
-            $destination = $user->city_id;
+            // $destination = $user->city_id;
             if($destination>0){
                 // hardcode
                 // $origin = 153; // Jakarta Selatan
@@ -163,8 +163,8 @@ class ShopController extends Controller
             try {
                 // prepare data
                 $origin = 153; // Jakarta Selatan
-                $destination = $user->city_id;
-                if($destination<=0) $error++;
+                // $destination = $user->city_id;
+                //if($destination<=0) $error++;
                 // $courier = $request->courier;
                 // $service = $request->service;
                 $carts = json_decode($request->carts, true);
